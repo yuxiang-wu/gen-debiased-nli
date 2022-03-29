@@ -57,6 +57,18 @@ We use SNLI-hard, MNLI-hard, HANS, and an adversarial attack suite to evaluate o
 
 ### Training with our datasets
 
+```bash
+python scripts/train_nli_synthetic.py \
+  --exp_name bert-base_mnli_z-aug_seed=42 \
+  --train_data data/gen-debiased-nli/mnli_z-aug \
+  --dev_data <path to MNLI dev> --data_dir data/ \
+  --model_name_or_path bert-base-uncased \
+  --max_length 128 --per_device_train_batch_size 32 --per_device_eval_batch_size 16 \
+  --learning_rate 1e-5 --num_train_epochs 5 --lr_scheduler_type constant_with_warmup --num_warmup_steps 2000 \
+  --output_dir <your output dir> \
+  --seed 42 --do_predict --do_train
+```
+
 ### Training PoE models with our datasets
 
 
