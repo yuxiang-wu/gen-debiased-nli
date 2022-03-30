@@ -18,7 +18,9 @@ published at [ACL 2022](https://www.2022.aclweb.org/).
 
 ## Download our Generated Debiased NLI (GD-NLI) Datasets
 
-Our synthetic debiased NLI datasets (GD-NLI) can be downloaded using the following links. All data files follow jsonline format. Each line contains a json object with the standard NLI fields `premise`, `hypothesis`, `label`, and a metadata field `type` that indicates whether the sample comes from the original dataset or is generated.
+Our synthetic debiased NLI datasets (GD-NLI) can be downloaded using the following links. All data files follow jsonline
+format. Each line contains a json object with the standard NLI fields `premise`, `hypothesis`, `label`, and a metadata
+field `type` that indicates whether the sample comes from the original dataset or is generated.
 
 | Dataset    |      #Samples | Link                                                                                                      |
 | ---------- | ---------:| --------|
@@ -49,7 +51,8 @@ You can download GD-NLI datasets with the links provided above, or run the follo
 . scripts/get_data.sh
 ```
 
-We use SNLI-hard, MNLI-hard, HANS, and an adversarial attack suite to evaluate our models. We also provide a script to download these evaluation datasets.
+We use SNLI-hard, MNLI-hard, HANS, and an adversarial attack suite to evaluate our models. We also provide a script to
+download these evaluation datasets.
 
 ```bash
 . scripts/get_eval_data.sh
@@ -59,7 +62,7 @@ We use SNLI-hard, MNLI-hard, HANS, and an adversarial attack suite to evaluate o
 
 ```bash
 python scripts/train_nli_synthetic.py \
-  --exp_name bert-base_mnli_z-aug_seed=42 \
+  --exp_name bert-base_mnli_z-aug \
   --train_data data/gen-debiased-nli/mnli_z-aug \
   --dev_data <path to MNLI dev> --data_dir data/ \
   --model_name_or_path bert-base-uncased \
@@ -71,6 +74,18 @@ python scripts/train_nli_synthetic.py \
 
 ### Training PoE models with our datasets
 
+```bash
+python scripts/train_nli_poe.py \
+  --exp_name bert-base_mnli_z-aug_poe \
+  --train_data data/gen-debiased-nli/mnli_z-aug \
+  --dev_data <path to MNLI dev> --data_dir data/ \
+  --model_name_or_path bert-base-uncased \
+  --max_length 128 --per_device_train_batch_size 32 --per_device_eval_batch_size 16 \
+  --learning_rate 2e-5 --num_train_epochs 3 --lr_scheduler_type linear --num_warmup_steps 1000 \
+  --output_dir <your output dir> \
+  --poe_loss --poe_alpha 2.0 --lambda_h 1.0 --nonlinear_h_classifier deep \
+  --seed 42 --do_predict --do_train
+```
 
 ## Citing
 
