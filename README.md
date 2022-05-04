@@ -77,7 +77,7 @@ python scripts/train_nli_synthetic.py \
 ```bash
 python scripts/train_nli_poe.py \
   --exp_name bert-base_mnli_z-aug_poe \
-  --train_data data/gen-debiased-nli/mnli_z-aug \
+  --train_data data/gen-debiased-nli/mnli_z-aug.jsonl \
   --dev_data <path to MNLI dev> --data_dir data/ \
   --model_name_or_path bert-base-uncased \
   --max_length 128 --per_device_train_batch_size 32 --per_device_eval_batch_size 16 \

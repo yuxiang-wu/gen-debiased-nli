@@ -6,3 +6,5 @@ sentencepiece != 0.1.92
 protobuf
 torch >= 1.7
 nltk
+sklearn
+json_lines
