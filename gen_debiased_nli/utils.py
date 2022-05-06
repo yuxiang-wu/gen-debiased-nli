@@ -63,7 +63,7 @@ def split_dataset(dataset: Dataset, percentage, seed=None):
 
 
 def del_columns(dataset):
-    dataset.remove_columns_(
+    dataset.remove_columns(
         list(filter(lambda n: n not in ["premise", "hypothesis", "label"], dataset.column_names))
     )
     return dataset
