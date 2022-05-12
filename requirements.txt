@@ -8,3 +8,4 @@ torch >= 1.7
 nltk
 sklearn
 json_lines
+transformers
